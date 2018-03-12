@@ -20,7 +20,7 @@ class MovieSpider(scrapy.Spider):
         请求电影内容
         :return:
         '''
-        yield Request(self.movie_url.format(start_index=self.start_index),callback=self.parse_data)
+        yield Request(self.movie_url.format(start_index=self.start_index), callback=self.parse_data, dont_filter=True)
 
     def parse_data(self, response):
         '''
@@ -42,5 +42,5 @@ class MovieSpider(scrapy.Spider):
 
             yield item
 
-        # self.start_index += 20
-        # yield Request(self.movie_url.format(start_index=self.start_index), callback=self.parse_data)
+        self.start_index += 20
+        yield Request(self.movie_url.format(start_index=self.start_index), callback=self.parse_data, dont_filter=True)
